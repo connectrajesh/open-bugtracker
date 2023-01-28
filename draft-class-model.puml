@@ -1,0 +1,48 @@
+@startuml
+class User {
++username: string
++password: string
++jwt: string
+}
+
+class Bug {
++id: string
++title: string
++description: string
++assignedTo: string
++priority: string
++createdBy: string
+}
+
+class Authentication {
++verifyCredentials(username: string, password: string): JWT
+}
+
+class Authorization {
++verifyJWT(jwt: string): User
++extractRoles(jwt: string): string[]
++isAuthorized(user: User, requiredRoles: string[]): boolean
+}
+
+class BugService {
+-authentication: Authentication
+-authorization: Authorization
++createBug(bug: Bug, jwt: string): Bug
++readBug(id: string, jwt: string): Bug
++updateBug(bug: Bug, jwt: string): Bug
++deleteBug(id: string, jwt: string): string
+}
+
+class BugTracker {
+-bugService: BugService
++login(username: string, password: string): JWT
++createBug(bug: Bug, jwt: string): Bug
++readBug(id: string, jwt: string): Bug
++updateBug(bug: Bug, jwt: string): Bug
++deleteBug(id: string, jwt: string): string
+}
+
+BugService --> Authentication
+BugService --> Authorization
+BugTracker --> BugService
+@enduml
