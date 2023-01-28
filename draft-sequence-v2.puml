@@ -1,0 +1,33 @@
+@startuml
+
+actor User
+
+User -> Auth0Provider : Login
+Auth0Provider -> AuthenticationService : verifyCredentials
+AuthenticationService -> Auth0Provider : JWT
+Auth0Provider -> User : JWT
+User -> BugTracker : createBug (JWT, Bug)
+BugTracker -> AuthorizationService : verifyJWT
+AuthorizationService -> BugTracker : User
+BugTracker -> BugService : createBug
+BugService -> BugTracker : Bug
+
+User -> BugTracker : readBug (JWT, Id)
+BugTracker -> AuthorizationService : verifyJWT
+AuthorizationService -> BugTracker : User
+BugTracker -> BugService : readBug
+BugService -> BugTracker : Bug
+
+User -> BugTracker : updateBug (JWT, Bug)
+BugTracker -> AuthorizationService : verifyJWT
+AuthorizationService -> BugTracker : User
+BugTracker -> BugService : updateBug
+BugService -> BugTracker : Bug
+
+User -> BugTracker : deleteBug (JWT, Id)
+BugTracker -> AuthorizationService : verifyJWT
+AuthorizationService -> BugTracker : User
+BugTracker -> BugService : deleteBug
+BugService -> BugTracker : message
+
+@enduml
