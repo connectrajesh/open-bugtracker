@@ -1,0 +1,47 @@
+@startuml
+
+actor User
+
+participant Auth0
+
+participant "Open-bugtracker System"
+
+participant "Creating Bug Service"
+
+participant "Reading Bug Service"
+
+participant "Updating Bug Service"
+
+participant "Deleting Bug Service"
+
+User -> Auth0: Login (username, password)
+
+Auth0 -> Auth0: Verify credentials
+
+Auth0 -> Auth0: Generate JWT
+
+Auth0 -> User: JWT
+
+User -> "Bugzilla System": Request (with JWT in headers)
+
+"Bugzilla System" -> "Bugzilla System": Verify JWT
+
+"Bugzilla System" -> "Bugzilla System": Extract user information and roles
+
+"Bugzilla System" -> "Creating Bug Service": Create Bug (with JWT)
+
+"Creating Bug Service" -> "Creating Bug Service": Create Bug
+
+"Bugzilla System" -> "Reading Bug Service": Read Bug (with JWT)
+
+"Reading Bug Service" -> "Reading Bug Service": Read Bug
+
+"Bugzilla System" -> "Updating Bug Service": Update Bug (with JWT)
+
+"Updating Bug Service" -> "Updating Bug Service": Update Bug
+
+"Bugzilla System" -> "Deleting Bug Service": Delete Bug (with JWT)
+
+"Deleting Bug Service" -> "Deleting Bug Service": Delete Bug
+
+@enduml
