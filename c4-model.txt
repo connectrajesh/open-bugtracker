@@ -1,0 +1,21 @@
+Level 1: Container
+
+The top level of the model represents the container or overall system. This could be the Bug Tracker application as a whole.
+Level 2: Component
+
+Authentication Microservice: Responsible for handling user authentication and JWT generation
+Authorization Microservice: Responsible for handling user authorization and extracting roles from JWT
+Bug Management Microservice: Responsible for handling CRUD operations on bugs
+Level 3: Class
+
+Authentication Microservice:
+User: Represents a user with properties such as username and password
+Authentication: Handles the verification of user credentials and generation of JWT
+Authorization Microservice:
+Authorization: Handles the verification of JWT and extraction of user roles
+Bug Management Microservice:
+Bug: Represents a bug with properties such as title, description, and assignedTo
+BugService: Handles the CRUD operations on bugs
+Level 4: Code:
+
+The code level would show the implementation details of each class and methods within the microservices.
